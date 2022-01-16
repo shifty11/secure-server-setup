@@ -29,3 +29,7 @@
 - name: Install duf
   import_tasks: install_duf.yml
   when: duf|default(false)|bool == true
+
+- name: Install bash-git-prompt
+  import_tasks: install_bash_git_prompt.yml
+  when: bash_git_prompt|default(false)|bool == true

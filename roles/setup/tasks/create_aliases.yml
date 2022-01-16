@@ -7,16 +7,24 @@
     group: '{{deployment_user}}'
     mode: 0644
 
+- name: check if exa_alias already added
+  shell: grep -c 'alias ls="exa"' /home/{{ deployment_user }}/.bash_aliases || true
+  register: exa_alias
+
 - name: add exa alias
   lineinfile:
     path: '/home/{{ deployment_user }}/.bash_aliases'
     line: 'alias ls="exa"'
-    insertbefore: BOF
-  when: exa|default(false)|bool == true
+    insertbefore: EOF
+  when: exa|default(false)|bool == true and not exa_alias|bool
+
+- name: check if duf_alias already added
+  shell: grep -c 'alias df="duf"' /home/{{ deployment_user }}/.bash_aliases || true
+  register: duf_alias
 
 - name: add duf alias
   lineinfile:
     path: '/home/{{ deployment_user }}/.bash_aliases'
     line: 'alias df="duf"'
-    insertbefore: BOF
-  when: duf|default(false)|bool == true
+    insertbefore: EOF
+  when: duf|default(false)|bool == true and not exa_alias|bool
