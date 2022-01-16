@@ -10,6 +10,22 @@
   register: ufw_status_result
   changed_when: False
 
+- name: open alternative ssh port
+  command: 'ufw allow {{ ssh_port }}/tcp'
+
+- name: close standard ssh port
+  command: ufw deny 22/tcp
+  when: ssh_port|default(22)|int != 22
+
+- name: Disable port 22 on ssh config
+  lineinfile:
+    dest: '/etc/ssh/sshd_config'
+    regex: '^Port 22'
+    line: 'Port {{ ssh_port }}'
+    state: present
+    create: true
+  when: ssh_port|default(22)|int != 22
+
 - name: Disable root login over SSH
   lineinfile:
     dest: '/etc/ssh/sshd_config'
