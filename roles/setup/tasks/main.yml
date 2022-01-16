@@ -21,3 +21,7 @@
 - name: Install promtail
   import_tasks: install_promtail.yml
   when: promtail|default(false)|bool == true
+
+- name: Install exa
+  import_tasks: install_exa.yml
+  when: exa|default(false)|bool == true

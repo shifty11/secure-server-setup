@@ -1,0 +1,17 @@
+---
+- name: download exa
+  get_url:
+    url: 'https://github.com/ogham/exa/releases/latest/download/exa-linux-x86_64-v{{ exa_version }}.zip'
+    dest: '/tmp/exa.zip'
+
+- name: unarchive exa
+  unarchive:
+    src: '/tmp/exa.zip'
+    remote_src: yes
+    dest: '/usr/local'
+
+- name: add exa alias
+  lineinfile:
+    path: '/home/{{ deployment_user }}/.bash_aliases'
+    line: 'alias ls="exa"'
+    insertbefore: BOF

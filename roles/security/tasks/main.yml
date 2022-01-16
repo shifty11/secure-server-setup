@@ -15,6 +15,7 @@
 
 - name: close standard ssh port
   command: ufw deny 22/tcp
+  when: ssh_port|default(22)|int != 22
 
 - name: Disable port 22 on ssh config
   lineinfile:
@@ -23,6 +24,7 @@
     line: 'Port {{ ssh_port }}'
     state: present
     create: true
+  when: ssh_port|default(22)|int != 22
 
 - name: Disable root login over SSH
   lineinfile:

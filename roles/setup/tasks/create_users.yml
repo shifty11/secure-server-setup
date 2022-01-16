@@ -5,11 +5,13 @@
     comment: 'Ansible user'
     shell: /bin/bash
 
-- name: Add ansible authorized key
-  authorized_key:
-    user: ansible
-    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-    exclusive: yes
+- name: Copy ssh keys for Ansible user
+  copy:
+    src: ~/.ssh
+    dest: /home/ansible/
+    owner: ansible
+    group: ansible
+    remote_src: true
 
 - name: Allow sudo for ansible
   copy:
@@ -23,11 +25,13 @@
     comment: 'admin user'
     shell: /bin/bash
 
-- name: Add administrator authorized key
-  authorized_key:
-    user: '{{ deployment_user }}'
-    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-    exclusive: yes
+- name: Copy ssh keys for administrator user
+  copy:
+    src: ~/.ssh
+    dest: '/home/{{ deployment_user }}/'
+    owner: '{{ deployment_user }}'
+    group: '{{ deployment_user }}'
+    remote_src: true
 
 - name: Allow sudo for administrator
   copy:

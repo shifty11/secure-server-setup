@@ -19,3 +19,7 @@ promtail=false
 promtail_version='2.4.1'
 promtail_monitor='http://192.168.0.0:3100'
 promtail_name=something
+
+# Exa
+exa=false
+exa_version=0.10.1

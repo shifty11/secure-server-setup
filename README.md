@@ -27,6 +27,7 @@ The main ansible playbook will both set up the machine and also secure the machi
 5. Install some essential software
 6. Optionally install node exporter (configurable in inventory)
 7. Optionally install promtail (configurable in inventory)
+8. Optionally install exa (configurable in inventory)
 
 ### Secure machine:
 
