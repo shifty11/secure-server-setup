@@ -6,3 +6,17 @@
     owner: '{{deployment_user}}'
     group: '{{deployment_user}}'
     mode: 0644
+
+- name: add exa alias
+  lineinfile:
+    path: '/home/{{ deployment_user }}/.bash_aliases'
+    line: 'alias ls="exa"'
+    insertbefore: BOF
+  when: exa|default(false)|bool == true
+
+- name: add duf alias
+  lineinfile:
+    path: '/home/{{ deployment_user }}/.bash_aliases'
+    line: 'alias df="duf"'
+    insertbefore: BOF
+  when: duf|default(false)|bool == true

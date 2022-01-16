@@ -1,0 +1,4 @@
+---
+- name: Install duf
+  apt:
+    deb: https://github.com/muesli/duf/releases/download/v{{ duf_version }}/duf_{{ duf_version }}_linux_amd64.deb

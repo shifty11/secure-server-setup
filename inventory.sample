@@ -23,3 +23,7 @@ promtail_name=something
 # Exa
 exa=false
 exa_version=0.10.1
+
+# Duf
+duf=true
+duf_version=0.7.0

@@ -25,3 +25,7 @@
 - name: Install exa
   import_tasks: install_exa.yml
   when: exa|default(false)|bool == true
+
+- name: Install duf
+  import_tasks: install_duf.yml
+  when: duf|default(false)|bool == true
