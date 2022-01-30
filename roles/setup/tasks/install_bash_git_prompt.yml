@@ -5,6 +5,13 @@
     dest: '/home/{{ deployment_user }}/.bash-git-prompt'
     depth: 1
 
+- name: Change owner
+  file:
+    dest: '/home/{{ deployment_user }}/.bash-git-prompt'
+    owner: '{{ deployment_user }}'
+    group: '{{ deployment_user }}'
+    recurse: yes
+
 - name: Add bash-git-prompt to .bashrc
   blockinfile:
     dest: '/home/{{ deployment_user }}/.bashrc'
