@@ -22,6 +22,7 @@
 - name: Create administrator user
   user:
     name: '{{ deployment_user }}'
+    groups: systemd-journal
     comment: 'admin user'
     shell: /bin/bash
 
